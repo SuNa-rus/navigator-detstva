@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d35">
+  <title>Навигатор детства — цифровая поддержка родителей</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script defer src="/assets/app.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">✳</div><div><strong>Навигатор<br>детства</strong><span>Образовательная платформа</span></div></div>
+      <div class="nav-caption">ПЛАТФОРМА</div>
+      <nav class="menu" aria-label="Основная навигация">
+        <button class="nav-link active" data-page="home"><span>⌂</span> Главная</button>
+        <button class="nav-link" data-page="library"><span>▤</span> Школа родителей</button>
+        <button class="nav-link" data-page="route"><span>◇</span> Маршрут ребёнка</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="side-note"><span>♡</span><strong>Забота начинается с информации</strong><p>Учебная версия для демонстрации возможностей платформы.</p></div><div class="side-foot">Версия 0.2 · MVP</div></div>
+    </aside>
+    <div class="content-shell">
+      <header class="topbar"><div class="crumb">Цифровая поддержка семей <span>/</span> <strong id="current-section">Главная</strong></div><div class="top-actions"><span class="demo-pill">● Учебный прототип</span><button class="user-button" id="user-button">Войти / Регистрация</button></div></header>
+      <main id="main-content">
+        <section class="page active" id="page-home">
+          <div class="hero"><div class="hero-text"><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ</span><h1>Рядом на каждом<br><em>этапе детства</em></h1><p>Информационные материалы для родителей и понятный навигатор по возрастным разделам — всё в одном месте.</p><button class="hero-action" data-page="library">Изучить материалы <span>→</span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-heart">♥</div><div class="art-spark a">✦</div><div class="art-spark b">✧</div></div></div>
+          <div class="section-head"><div><span class="small-label">ВОЗМОЖНОСТИ</span><h2>С чего начнём?</h2></div></div>
+          <div class="feature-grid"><button class="feature-card" data-page="library"><span class="feature-icon blue">▤</span><strong>Школа родителей</strong><p>Полезные материалы с поиском и темами</p><span class="feature-more">Открыть каталог →</span></button><button class="feature-card" data-page="route"><span class="feature-icon peach">◇</span><strong>Маршрут ребёнка</strong><p>Возрастные разделы и отметки просмотра</p><span class="feature-more">Смотреть маршрут →</span></button><button class="feature-card" id="home-account"><span class="feature-icon mint">♙</span><strong>Личный кабинет</strong><p>Учебная учётная запись для сохранения отметок</p><span class="feature-more">Войти или создать →</span></button></div>
+          <div class="notice"><span>ⓘ</span><p><strong>Обратите внимание.</strong> Это демонстрационная версия. Материалы не являются медицинскими рекомендациями, маршрут не содержит утверждённого графика обследований. При вопросах о здоровье обращайтесь к специалисту.</p></div>
+        </section>
+        <section class="page" id="page-library">
+          <div class="page-header"><span class="small-label">ЦИФРОВАЯ ШКОЛА РОДИТЕЛЕЙ</span><h1>Библиотека знаний</h1><p>Подборка демонстрационных материалов для родителей и законных представителей.</p></div>
+          <div class="search-wrap"><span>⌕</span><input id="article-search" type="search" maxlength="100" placeholder="Поиск по названию и описанию…" aria-label="Поиск материалов"></div>
+          <div class="chips" id="category-chips"></div>
+          <div class="collection-head"><h2>Материалы <span id="article-count">0</span></h2><span>Для ознакомления</span></div>
+          <div class="article-grid" id="article-grid"></div>
+          <p class="empty-state" id="articles-empty" hidden>По вашему запросу ничего не найдено. Попробуйте другой запрос.</p>
+        </section>
+        <section class="page" id="page-route">
+          <div class="page-header"><span class="small-label">ЦИФРОВОЙ МАРШРУТ РЕБЁНКА</span><h1>Этапы детства</h1><p>Общие возрастные разделы. Отмечайте просмотренные разделы, чтобы ориентироваться в материалах.</p></div>
+          <div class="route-banner"><div><span>ВАШ ПРОГРЕСС ОЗНАКОМЛЕНИЯ</span><strong id="progress-heading">0 из 5 разделов</strong><p id="progress-info">Войдите, чтобы сохранять отметки между посещениями.</p></div><div class="progress-ring" id="progress-ring"><span id="progress-percent">0%</span></div></div>
+          <div class="progress-track"><div id="progress-fill"></div></div>
+          <div class="timeline" id="stage-list"></div>
+          <div class="notice"><span>ⓘ</span><p>Отметка означает только, что вы ознакомились с разделом. Это не подтверждение прохождения медицинского осмотра или выполнения назначения врача.</p></div>
+        </section>
+      </main>
+      <footer>© Навигатор детства · Учебный проект · Без реальных персональных и медицинских данных</footer>
+    </div>
+  </div>
+  <div class="modal" id="article-modal" hidden><div class="modal-shade" data-close="article"></div><div class="modal-card article-modal-card" role="dialog" aria-modal="true" aria-labelledby="article-title"><button class="close-modal" data-close="article" aria-label="Закрыть">×</button><span class="small-label" id="article-category"></span><h2 id="article-title"></h2><span class="article-read" id="article-read"></span><p id="article-body"></p><div class="article-disclaimer">Учебный материал. Не заменяет консультацию медицинского специалиста.</div></div></div>
+  <div class="modal" id="auth-modal" hidden><div class="modal-shade" data-close="auth"></div><div class="modal-card auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title"><button class="close-modal" data-close="auth" aria-label="Закрыть">×</button><span class="auth-emblem">✳</span><h2 id="auth-title">Добро пожаловать</h2><p>Используйте вымышленный логин. Не вводите реальные медицинские данные.</p><div class="auth-switch"><button id="login-tab" class="selected" type="button">Вход</button><button id="register-tab" type="button">Регистрация</button></div><form id="auth-form"><label>Логин <input id="auth-username" name="username" autocomplete="username" maxlength="24" minlength="3" pattern="[A-Za-z0-9_]+" required placeholder="Например: test_parent"></label><label>Пароль <input id="auth-password" name="password" type="password" autocomplete="current-password" maxlength="128" minlength="8" required placeholder="Не менее 8 символов"></label><p class="form-error" id="auth-error" role="alert" hidden></p><button class="primary-button" id="auth-submit" type="submit">Войти</button></form></div></div>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>
