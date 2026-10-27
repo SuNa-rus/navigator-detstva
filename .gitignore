@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -39,3 +39,5 @@ Thumbs.db
 node_modules/
 dist/
 coverage/
+
+.navigator_backup_031/

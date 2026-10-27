@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 from .auth import COOKIE_NAME, SESSION_LIFETIME, create_session, delete_session, hash_password, require_user, session_user, verify_password
 from .db import connect, initialize
+from .editor import initialize_editor, router as editor_router
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -18,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     initialize()
+    initialize_editor()
     yield
 
 
@@ -67,7 +69,7 @@ def articles(q: str = Query(default="", max_length=100), category: str = Query(d
             WHERE a.status = 'published'
               AND (? = '' OR a.category = ?)
               AND (? = '' OR a.title LIKE ? OR a.summary LIKE ?)
-            ORDER BY a.id
+            ORDER BY COALESCE(a.published_at, '2000-01-01 00:00:00') DESC, a.id DESC
         """, (category, category, q, f"%{q}%", f"%{q}%"))]
 
 
@@ -134,3 +136,4 @@ def set_progress(stage_id: int, payload: ProgressChange, nd_session: str | None 
         else:
             db.execute("DELETE FROM progress WHERE user_id = ? AND stage_id = ?", (user["id"], stage_id))
     return {"ok": True, "stage_id": stage_id, "completed": payload.completed}
+app.include_router(editor_router)
